@@ -34,3 +34,5 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - vendor
+  - config.ru
