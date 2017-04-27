@@ -6,9 +6,6 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-script/setup
-
-gitbook build
 git checkout gh-pages
 git pull origin gh-pages --rebase
 cp -R _book/* .
