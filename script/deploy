@@ -6,6 +6,12 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+remote=$(git config remote.origin.url)
+git config --global user.email "$GH_EMAIL" > /dev/null 2>&1
+git config --global user.name "$GH_NAME" > /dev/null 2>&1
+#git init
+git remote add --fetch origin "$remote"
+
 git checkout gh-pages
 git pull origin gh-pages --rebase
 cp -R _book/* .
@@ -13,12 +19,12 @@ git clean -fx node_modules
 git clean -fx _book
 
 git add .
-git commit -m "update book"
+git commit -m "update book [ci skip]"
 
-bundle install
+#bundle install
 
 echo -e "\n\n"
-echo "==> Opening index.html on your browser... if everything looks good push to gh-pages."
+echo "==> Deploying..."
 echo -e "\n\n"
 
 git push
