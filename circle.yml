@@ -4,6 +4,7 @@ machine:
 dependencies:
   pre:
     - script/setup
+    - sudo aptitude install calibre
 test:
   override:
     - script/cibuild

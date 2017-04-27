@@ -7,5 +7,6 @@ set -e
 cd "$(dirname "$0")/.."
 
 gitbook build
+gitbook pdf . mybook.pdf
 
 #bundle exec jekyll serve
