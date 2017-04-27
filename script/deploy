@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# script/server: produce jekyll site of the manual
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+script/setup
+
+gitbook build
+git checkout gh-pages
+git pull origin gh-pages --rebase
+cp -R _book/* .
+git clean -fx node_modules
+git clean -fx _book
+
+git add .
+git commit -m "update book"
+
+bundle install
+
+echo -e "\n\n"
+echo "==> Opening index.html on your browser... if everything looks good push to gh-pages."
+echo -e "\n\n"
+
+bundle exec jekyll serve
