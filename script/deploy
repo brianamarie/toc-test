@@ -24,4 +24,4 @@ echo -e "\n\n"
 echo "==> Opening index.html on your browser... if everything looks good push to gh-pages."
 echo -e "\n\n"
 
-bundle exec jekyll serve
+git push

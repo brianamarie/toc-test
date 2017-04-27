@@ -7,3 +7,8 @@ dependencies:
 test:
   override:
     - script/cibuild
+deployment:
+  production:
+    branch: master
+    commands:
+    - script/deploy
