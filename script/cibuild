@@ -6,7 +6,10 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+echo "==> Building book"
 gitbook build
+
+echo "==> Generating PDF"
 gitbook pdf . mybook.pdf
 
 #bundle exec jekyll serve
