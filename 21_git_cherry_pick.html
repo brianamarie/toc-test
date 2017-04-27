@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Cherry Picking · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="22_merge_strategies_rebase.html" />
     
+    
+    <link rel="prev" href="20_rewriting_history_git_reset.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -390,7 +392,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.4" data-path="21_git_cherry_pick.html">
+        <li class="chapter active" data-level="5.4" data-path="21_git_cherry_pick.html">
             
                 <a href="21_git_cherry_pick.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Cherry Picking</a>
     </h1>
 </div>
 
@@ -507,13 +509,44 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="getting-it-back-git-cherry-pick">Getting it Back: <code>git cherry-pick</code></h2>
+<p>We just learned how reflog can help us find local changes that have been discarded. So what if:</p>
+<h3 id="you-just-want-that-one-commit">You Just Want That One Commit</h3>
+<p>Cherry picking allows you to pick up a commit from your reflog or another branch of your project and move it to your current branch. Right now, your file directory and log should look like this:</p>
+<pre><code class="lang-sh">$ ls
+README.md
+$ git <span class="hljs-built_in">log</span> --oneline
+84nqdkq initializing repo with README
+</code></pre>
+<p>Let&apos;s cherry pick the commit where we added file 4:</p>
+<ol>
+<li>Find the commit ID where you added file4.md: <code>git reflog</code></li>
+<li>Cherry-pick that commit: <code>git cherry-pick &lt;SHA&gt;</code></li>
+</ol>
+<p>Now when you view your directory and log, you should see:</p>
+<pre><code class="lang-sh">$ ls
+file4.md
+README.md
+$ git <span class="hljs-built_in">log</span> --oneline
+eanu482 adding file 4
+84nqdkq initializing repo with README
+</code></pre>
+<p>Is the commit ID the same as the one you used in the cherry pick command? Why or why not?</p>
+<blockquote>
+<p>Remember, when using any commands that change history, it&apos;s important to make these changes before pushing to GitHub. When you change a commit ID that has been pushed to the remote, you risk creating problems for your collaborators.
+{: .warning}</p>
+</blockquote>
+<h3 id="oops-i-didnt-mean-to-reset">Oops, I Didn&apos;t Mean to Reset</h3>
+<p>Sometimes, you <code>git reset --hard</code> a little further than intended and want to restore that work. The good news is, that <code>git reset --hard</code> doesn&apos;t just work by going back in time, it can also go forward:</p>
+<ol>
+<li>View the history of everywhere HEAD has pointed: <code>git reflog</code></li>
+<li>Reset to the point in time where the original <code>file6.md</code> was created: <code>git reset --hard &lt;SHA&gt;</code></li>
+<li>See your restored history: <code>git log --oneline</code></li>
+</ol>
+<p>Take a look at the commit IDs in <code>git log --oneline</code> compared to <code>git reflog</code>. What do you notice?</p>
+<blockquote>
+<p>Why didn&apos;t this command cause a merge conflict since we had already cherry-picked file 4. The reason is that <code>git reset --hard</code> is not trying to merge the two histories together, it is simply moving the branch to point to a new commit. In this case, this was what we wanted. In other cases, this could cause us to loose any work we may have done after the original reset.</p>
+</blockquote>
 
                                 
                                 </section>
@@ -541,8 +574,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="20_rewriting_history_git_reset.html" class="navigation navigation-prev " aria-label="Previous page: Rewriting History with Git Reset">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="22_merge_strategies_rebase.html" class="navigation navigation-next " aria-label="Next page: Merge Strategies">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +590,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Cherry Picking","level":"5.4","depth":1,"next":{"title":"Merge Strategies","level":"5.5","depth":1,"path":"22_merge_strategies_rebase.md","ref":"22_merge_strategies_rebase.md","articles":[]},"previous":{"title":"Rewriting History with Git Reset","level":"5.3","depth":1,"path":"20_rewriting_history_git_reset.md","ref":"20_rewriting_history_git_reset.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"21_git_cherry_pick.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

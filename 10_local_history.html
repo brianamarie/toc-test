@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Local History · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="11_streamline_workflow_with_aliases.html" />
     
+    
+    <link rel="prev" href="09_merging_pull_requests.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -226,7 +228,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.7" data-path="10_local_history.html">
+        <li class="chapter active" data-level="2.7" data-path="10_local_history.html">
             
                 <a href="10_local_history.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Local History</a>
     </h1>
 </div>
 
@@ -507,13 +509,22 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="viewing-local-project-history">Viewing Local Project History</h2>
+<p>In this section, you will discover commands for viewing the history of your project.</p>
+<h3 id="using-git-log">Using Git Log</h3>
+<p>When you clone a repository, you receive the history of all of the commits made in that repository. The log command allows us to view that history on our local machine.</p>
+<p>Let&apos;s take a look at some of the option switches you can use to customize your view of the project history.</p>
+<pre><code class="lang-sh">$ git <span class="hljs-built_in">log</span>
+$ git <span class="hljs-built_in">log</span> --oneline
+$ git <span class="hljs-built_in">log</span> --oneline --graph
+$ git <span class="hljs-built_in">log</span> --oneline --graph --decorate
+$ git <span class="hljs-built_in">log</span> --oneline --graph --decorate --all
+$ git <span class="hljs-built_in">log</span> --stat
+$ git <span class="hljs-built_in">log</span> --patch
+</code></pre>
+<blockquote>
+<p>Use the up and down arrows or press enter to view additional log entries. Type q to quit viewing the log and return to the command prompt.</p>
+</blockquote>
 
                                 
                                 </section>
@@ -541,8 +552,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="09_merging_pull_requests.html" class="navigation navigation-prev " aria-label="Previous page: Merging Pull Requests">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="11_streamline_workflow_with_aliases.html" class="navigation navigation-next " aria-label="Next page: Streamline Workflow with Aliases">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +568,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Local History","level":"2.7","depth":1,"next":{"title":"Streamline Workflow with Aliases","level":"2.8","depth":1,"path":"11_streamline_workflow_with_aliases.md","ref":"11_streamline_workflow_with_aliases.md","articles":[]},"previous":{"title":"Merging Pull Requests","level":"2.6","depth":1,"path":"09_merging_pull_requests.md","ref":"09_merging_pull_requests.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"10_local_history.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Merging Pull Requests · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="10_local_history.html" />
     
+    
+    <link rel="prev" href="08_edit_on_github.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -213,7 +215,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.6" data-path="09_merging_pull_requests.html">
+        <li class="chapter active" data-level="2.6" data-path="09_merging_pull_requests.html">
             
                 <a href="09_merging_pull_requests.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Merging Pull Requests</a>
     </h1>
 </div>
 
@@ -507,13 +509,56 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="merging-pull-requests">Merging Pull Requests</h2>
+<p>Now that you have made the requested changes, your pull request should be ready to merge.</p>
+<h3 id="merge-explained">Merge Explained</h3>
+<p>When you merge your branch, you are taking the content and history from your feature branch and adding it to the content and history of the <code>gh-pages</code> branch.</p>
+<p>Many project teams have established rules about who should merge a pull request.</p>
+<ul>
+<li>Some say it should be the person who created the pull request since they will be the ones to deal with any issues resulting from the merge.</li>
+<li>Others say it should be a single person within the project team to ensure consistency.</li>
+<li>Still others say it can be anyone other than the person who created the pull request to ensure at least one review has taken place.</li>
+</ul>
+<p>This is a discussion you should have with the other members of your team.</p>
+<h3 id="merging-your-pull-request">Merging Your Pull Request</h3>
+<p>Let&apos;s take a look at how you can merge the pull request.</p>
+<ol>
+<li>Navigate to your Pull Request (HINT: Use the Author or Assignee drop downs to find your Pull Request quickly)</li>
+<li>Click <em>Conversation</em></li>
+<li>Scroll to the bottom of the Pull Request and click the <em>Merge pull request</em> button</li>
+<li>Click <em>Confirm merge</em></li>
+<li>Click <em>Delete branch</em></li>
+<li>Click <em>Issues</em> and confirm your original issue has been closed</li>
+</ol>
+<blockquote>
+<p>GitHub offers three different merge strategies for Pull Requests:</p>
+<ul>
+<li><strong>Create a merge commit:</strong> This is the traditional option that will perform a standard recursive merge. A new commit will be added that shows the point when the two branches were merged together.</li>
+<li><strong>Squash and merge:</strong> This option will take all of the commits on your branch and compress them into a single commit. The commit messages will be preserved in the extended commit message for the commit, but the individual commits will be lost.</li>
+<li><strong>Rebase and merge:</strong> This option will take all of the commits and replay them as if they just happened. This allows GitHub to perform a fast forward merge (and avoids the addition of the merge commit).</li>
+</ul>
+</blockquote>
+<h3 id="updating-your-local-repository">Updating Your Local Repository</h3>
+<p>When you merged your Pull Request, you deleted the branch on GitHub, but this will not automatically update your local copy of the repository. Let&apos;s go back to our command line application and get everything in sync.</p>
+<p>First, we need to get the changes we made on GitHub into our local copy of the repository:</p>
+<ol>
+<li>Start by switching back to your default branch: <code>git checkout gh-pages</code></li>
+<li>Retrieve all of the changes from GitHub: <code>git pull</code></li>
+</ol>
+<p><code>git pull</code> is a combination command that retrieves all of the changes from GitHub and then updates the branch you are currently on to include the changes from the remote. The two separate commands being run are <code>git fetch</code> and <code>git merge</code></p>
+<h3 id="cleaning-up-the-unneeded-branches">Cleaning Up the Unneeded Branches</h3>
+<p>If you type <code>git branch --all</code> you will probably see that, even though you deleted your branch on the remote, it is still listed in your local copy of the repository, both as a local branch and as a read-only remote tracking branch. Let&apos;s get rid of those extra branches.</p>
+<ol>
+<li>Take a look at your local branches: <code>git branch --all</code></li>
+<li>Let&apos;s see which branches are safe to delete: <code>git branch --merged</code></li>
+<li>Delete the local branch: <code>git branch -d &lt;branch-name&gt;</code></li>
+<li>Take another look at the list: <code>git branch --all</code></li>
+<li>Your local branch is gone but the remote tracking branch is still there. Delete the remote tracking branch: <code>git pull --prune</code></li>
+</ol>
+<blockquote>
+<p>Adding the <code>--merged</code> option to the <code>git branch</code> command allows you to see which branches do not contain unique work when compared to the checked out branch. In this case, since we are checked out to gh-pages, we will use this command to ensure all of the changes on our feature branch have been merged to production before we delete the branch.</p>
+</blockquote>
+<p>If you would like pruning of the remote tracking branches to be set as your default behavior when you pull, you can use the following configuration option: <code>git config --global fetch.prune true</code>.</p>
 
                                 
                                 </section>
@@ -541,8 +586,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="08_edit_on_github.html" class="navigation navigation-prev " aria-label="Previous page: Editing on GitHub">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="10_local_history.html" class="navigation navigation-next " aria-label="Next page: Local History">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +602,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Merging Pull Requests","level":"2.6","depth":1,"next":{"title":"Local History","level":"2.7","depth":1,"path":"10_local_history.md","ref":"10_local_history.md","articles":[]},"previous":{"title":"Editing on GitHub","level":"2.5","depth":1,"path":"08_edit_on_github.md","ref":"08_edit_on_github.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"09_merging_pull_requests.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

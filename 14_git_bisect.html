@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Git Bisect · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="15_reverting_commits.html" />
     
+    
+    <link rel="prev" href="13_workflow_review_project_github_games.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -292,7 +294,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="14_git_bisect.html">
+        <li class="chapter active" data-level="4.2" data-path="14_git_bisect.html">
             
                 <a href="14_git_bisect.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Git Bisect</a>
     </h1>
 </div>
 
@@ -507,13 +509,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="searching-for-events-in-your-code">Searching for Events in Your Code</h2>
+<p>In this section, we will learn how we can use <code>git bisect</code> to find the commit that introduced a bug into our repository.</p>
+<h3 id="what-is-git-bisect">What is <code>git bisect</code>?</h3>
+<p>Using a binary search, <code>git bisect</code> can help us detect specific events in our code. For example, you could use bisect to locate the commit where:</p>
+<ul>
+<li>a bug was introduced.</li>
+<li>a new feature was added.</li>
+<li>a benchmark&#x2019;s performance improved.</li>
+</ul>
+<h4 id="how-it-works">How it works</h4>
+<p><code>git bisect</code> works by cutting the history between two points in half and then checking you out to that commit. You then check whether the bug/feature exists at that point and tell Git the result. From there, Git will do another division, etc until you have located the desired commit.</p>
+<blockquote>
+<p>When you are doing a bisect, you are essentially in a detached head state. It is important to remember to end the bisect with <code>git bisect reset</code> before attempting to perform other operations with Git.
+{: .warning}</p>
+</blockquote>
+<h3 id="finding-the-bug-in-our-project">Finding the Bug in Our Project</h3>
+<h4 id="the-long-way">The Long Way</h4>
+<ol>
+<li>Initiate the binary search: <code>git bisect start</code>.</li>
+<li>Specify the commit where you noticed the code was broken: <code>git bisect bad &lt;SHA&gt;</code>.</li>
+<li>Specify the commit where you knew things were working: <code>git bisect good &lt;SHA</code>.</li>
+<li>Bisect will check you out to the midpoint between good and bad.</li>
+<li>Run a test to see if the game would work at this point. Our test is to use <code>ls</code> to see if an <code>index.html</code> file exists.</li>
+<li>If the game is still broken (there <em>is no</em> <code>index.html</code> file), type: <code>git bisect bad</code>.</li>
+<li>If the game works (and there <em>is</em> an <code>index.html</code> file), type: <code>git bisect good</code>.</li>
+<li>Git will bisect again and wait for you to test. This will happen until Git has enough information to pinpoint the first bad commit.</li>
+<li>When Git has detected the error, it will provide a message that <code>SHA is the first bad commit.</code></li>
+<li>Exit the bisect process: <code>git bisect reset</code>.</li>
+</ol>
+<h4 id="the-short-way">The Short Way</h4>
+<p>Bisect can also run the tests on your code automatically. Let&apos;s try it again using a shortcut command and a test:</p>
+<ol>
+<li><code>git bisect start &lt;bad-SHA&gt; &lt;good-SHA&gt;</code></li>
+<li><code>git bisect run ls index.html</code></li>
+</ol>
 
                                 
                                 </section>
@@ -541,8 +571,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="13_workflow_review_project_github_games.html" class="navigation navigation-prev " aria-label="Previous page: Workflow Review">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="15_reverting_commits.html" class="navigation navigation-next " aria-label="Next page: Reverting Commits">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +587,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Git Bisect","level":"4.2","depth":1,"next":{"title":"Reverting Commits","level":"4.3","depth":1,"path":"15_reverting_commits.md","ref":"15_reverting_commits.md","articles":[]},"previous":{"title":"Workflow Review","level":"4.1","depth":1,"path":"13_workflow_review_project_github_games.md","ref":"13_workflow_review_project_github_games.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"14_git_bisect.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

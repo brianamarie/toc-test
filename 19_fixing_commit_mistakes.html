@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Fixing Commit Mistakes · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="20_rewriting_history_git_reset.html" />
     
+    
+    <link rel="prev" href="18_create_local_repo.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -364,7 +366,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="19_fixing_commit_mistakes.html">
+        <li class="chapter active" data-level="5.2" data-path="19_fixing_commit_mistakes.html">
             
                 <a href="19_fixing_commit_mistakes.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Fixing Commit Mistakes</a>
     </h1>
 </div>
 
@@ -507,13 +509,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="fixing-commit-mistakes">Fixing Commit Mistakes</h2>
+<p>In this activity, we will begin to explore some of the ways Git and GitHub can help us shape our project history.</p>
+<h3 id="revising-your-last-commit">Revising Your Last Commit</h3>
+<p><code>git commit --amend</code> allows us to make changes to the commit that HEAD is currently pointing to. Two of the most common uses are:</p>
+<ul>
+<li>Re-writing commit messages</li>
+<li>Adding files to the commit</li>
+</ul>
+<p>Let&apos;s see this in action:</p>
+<ol>
+<li>Create a new file: <code>touch file7.txt</code></li>
+<li>When you are adding files to the previous commit, they should be in the staging area. Move your file to the staging area: <code>git add file7.txt</code></li>
+<li><code>git commit --amend</code></li>
+<li>The text editor will open, allowing you to edit your commit message.</li>
+</ol>
+<blockquote>
+<p>You can actually amend any data stored by the last commit such as commit author, email, etc.</p>
+</blockquote>
 
                                 
                                 </section>
@@ -541,8 +554,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="18_create_local_repo.html" class="navigation navigation-prev " aria-label="Previous page: Create a Local Repo">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="20_rewriting_history_git_reset.html" class="navigation navigation-next " aria-label="Next page: Rewriting History with Git Reset">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +570,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing Commit Mistakes","level":"5.2","depth":1,"next":{"title":"Rewriting History with Git Reset","level":"5.3","depth":1,"path":"20_rewriting_history_git_reset.md","ref":"20_rewriting_history_git_reset.md","articles":[]},"previous":{"title":"Create a Local Repo","level":"5.1","depth":1,"path":"18_create_local_repo.md","ref":"18_create_local_repo.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"19_fixing_commit_mistakes.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Rewriting History with Git Reset · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="21_git_cherry_pick.html" />
     
+    
+    <link rel="prev" href="19_fixing_commit_mistakes.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -377,7 +379,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="20_rewriting_history_git_reset.html">
+        <li class="chapter active" data-level="5.3" data-path="20_rewriting_history_git_reset.html">
             
                 <a href="20_rewriting_history_git_reset.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Rewriting History with Git Reset</a>
     </h1>
 </div>
 
@@ -507,13 +509,70 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="rewriting-history-with-git-reset">Rewriting History with Git Reset</h2>
+<p>When you want to make changes to commits further back in history, you will need to use a more powerful command: <code>git reset</code>.</p>
+<h3 id="understanding-reset">Understanding Reset</h3>
+<p>Sometimes we are working on a branch and we decide things aren&apos;t going quite like we had planned. We want to reset some, or even all, of our files to look like what they were at a different point in history.</p>
+<p><img src="img/reset-visual.jpg" alt="Git Reset Before and After"></p>
+<p>Remember, there are three different snapshots of our project at any given time. The first is the most recent commit (also known as HEAD). The second is the staging area (also called the index). The third is the working directory containing any new, deleted, or modified files.</p>
+<p>The <code>git reset</code> command has three modes, and they allow us to change some or all of these three snapshots.</p>
+<p>It also helps to know what branches technically are: each is a pointer, or reference, to the latest commit in a line of work. As we add new commits, the currently checked-out branch &quot;moves forward,&quot; so that it always points to the most recent commit.</p>
+<h3 id="reset-modes">Reset Modes</h3>
+<p><img src="img/reset-modes.jpg" alt="Three modes of reset"></p>
+<p>The three modes for git reset are: <code>--soft</code>, <code>--mixed</code>, and <code>--hard</code>. For these examples, assume that we have a &quot;clean&quot; working directory, i.e. there are no uncommited changes.</p>
+<h4 id="-soft"><code>--soft</code></h4>
+<p><code>git reset --soft &lt;SHA&gt;</code> moves the current branch to point at the <code>&lt;SHA&gt;</code>. However, the working directory and staging area remain untouched. Since the snapshot that current branch points to now differs from the index&apos;s snapshot, this command effectively stages all differences between those snapshots. This is a good command to use when you have made a large number of small commits and you would like to regroup them into a single commit.</p>
+<h4 id="-mixed"><code>--mixed</code></h4>
+<p><code>git reset --mixed &lt;SHA&gt;</code> makes the current branch <em>and</em> the staging area look like the <code>&lt;SHA&gt;</code> snapshot. <em>This is the default mode:</em> if you don&apos;t include a mode flag, Git will assume you want to do a <code>--mixed</code> reset. <code>--mixed</code> is useful if you want to keep all of your changes in the working directory, but change whether and how you commit those changes.</p>
+<h4 id="-hard"><code>--hard</code></h4>
+<p><code>git reset --hard &lt;SHA&gt;</code> is the most drastic option. With this, Git will make all 3 snapshots, the current branch, the staging area, <em>and</em> your working directory, look like they did at <code>&lt;other-commit&gt;</code>. This can be dangerous! We&apos;ve assumed so far that our working directory is clean. If it is not, and you have uncommitted changes, <code>git reset --hard</code> will <em>delete all of those changes</em>. Even with a clean working directory, use <code>--hard</code> only if you&apos;re sure you want to completely undo earlier changes.</p>
+<h3 id="reset-soft">Reset Soft</h3>
+<p>Using the practice repository we created earlier, let&apos;s try a <code>reset --soft</code>.</p>
+<ol>
+<li>View the history of our project: <code>git log --oneline --decorate</code></li>
+<li>Identify the current location of <code>HEAD</code>.</li>
+<li>Go back two commits in history: <code>git reset --soft HEAD~2</code></li>
+<li>See the tip of our branch (and <code>HEAD</code>) is now sitting two commits earlier than it was before: <code>git log --oneline --decorate</code></li>
+<li>The changes we made in the last two commits should be in the staging area: <code>git status</code></li>
+<li>Re-commit these changes: <code>git commit -m &quot;re-add file 5 and 6&quot;</code></li>
+</ol>
+<blockquote>
+<p>In this example, the tilde tells git we want to reset to two commits before the current location of <code>HEAD</code>. You can also use the first few characters of the commit ID to pinpoint the location where you would like to reset.</p>
+</blockquote>
+<h3 id="reset-mixed">Reset Mixed</h3>
+<p>Next we will try the default mode of reset, <code>reset --mixed</code>:</p>
+<ol>
+<li>Once again, we will start by viewing the history of our project: <code>git log --oneline</code></li>
+<li>Go back one commit in history: <code>git reset HEAD~</code></li>
+<li>See where the tip of the branch is pointing: <code>git log --oneline --decorate</code></li>
+<li>The changes we made in the last commit have been moved back to the working directory: <code>git status</code></li>
+<li>Move the files to the staging area before we can commit them: <code>git add file5.md file6.md</code></li>
+<li>Re-commit the files: <code>git commit -m &quot;re-add file 5 and 6&quot;</code></li>
+</ol>
+<blockquote>
+<p>Notice that although we have essentially made the exact same commit (adding file 5 and 6 together with the same HEAD and commit message) we still get a new commit ID. This can help us see why the reset command should never be used on commits that have been pushed to the remote.</p>
+</blockquote>
+<h3 id="reset-hard">Reset Hard</h3>
+<p>Last but not least, let&apos;s try a hard reset.</p>
+<ol>
+<li>Start by viewing the history of our project with: <code>git log --oneline</code></li>
+<li>Reset to the point in time where the only file that existed was the README.md: <code>git reset --hard &lt;SHA&gt;</code></li>
+<li>See that all of the commits are gone: <code>git log --oneline</code></li>
+<li>Notice your working directory is clean: <code>git status</code></li>
+<li>See that the only file in your repository is the README.md: <code>ls</code></li>
+</ol>
+<blockquote>
+<p><strong>Warning:</strong> Remember, <code>git reset --hard</code> overwrites your working directory, staging area, and history. This means that uncommitted changes you have made to your files will be completely lost. Don&apos;t use it unless you really want to discard your changes.</p>
+</blockquote>
+<h3 id="does-gone-really-mean-gone">Does Gone Really Mean Gone?</h3>
+<p>The answer: It depends!</p>
+<pre><code class="lang-sh">$ git reflog
+</code></pre>
+<p>The reflog is a record of every place HEAD has been. In a few minutes we will see how the reflog can be helpful in allowing us to restore previously committed changes. But first, we need to be aware of some of the reflog&apos;s limitations:</p>
+<ul>
+<li><strong>The reflog is only local.</strong> It is not pushed to the remote and only includes your local history. In other words, you can&apos;t see the reflog for someone else&apos;s commits and they can&apos;t see yours.</li>
+<li><strong>The reflog is a limited time offer.</strong> By default, reachable commits are displayed in the reflog for 90 days, but unreachable commits (meaning commits that are not attached to a branch) are only displayed for 30 days.</li>
+</ul>
 
                                 
                                 </section>
@@ -541,8 +600,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="19_fixing_commit_mistakes.html" class="navigation navigation-prev " aria-label="Previous page: Fixing Commit Mistakes">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="21_git_cherry_pick.html" class="navigation navigation-next " aria-label="Next page: Cherry Picking">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +616,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Rewriting History with Git Reset","level":"5.3","depth":1,"next":{"title":"Cherry Picking","level":"5.4","depth":1,"path":"21_git_cherry_pick.md","ref":"21_git_cherry_pick.md","articles":[]},"previous":{"title":"Fixing Commit Mistakes","level":"5.2","depth":1,"path":"19_fixing_commit_mistakes.md","ref":"19_fixing_commit_mistakes.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"20_rewriting_history_git_reset.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

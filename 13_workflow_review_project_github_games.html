@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Workflow Review · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="14_git_bisect.html" />
     
+    
+    <link rel="prev" href="12_resolving_merge_conflicts.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -279,7 +281,7 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="13_workflow_review_project_github_games.html">
+        <li class="chapter active" data-level="4.1" data-path="13_workflow_review_project_github_games.html">
             
                 <a href="13_workflow_review_project_github_games.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Workflow Review</a>
     </h1>
 </div>
 
@@ -507,13 +509,42 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="project-github-games">Project: GitHub Games</h2>
+<p>In this section, we will work on a project repository called <code>github-games</code>.</p>
+<p>A <code>github-games</code> repository has been created for you in the githubschool organization. You can access the repository at <code>https://github.com/githubschool/github-games-username</code>.</p>
+<h3 id="creating-a-fork">Creating a Fork</h3>
+<ol>
+<li>Navigate to the repo <code>githubschool/github-games</code>.</li>
+<li>Click <em>Fork</em>.</li>
+</ol>
+<blockquote>
+<p>If you are part of an Organization on GitHub, you may see an additional screen that asks where you&apos;d like to fork the repository. Choose your personal account.</p>
+</blockquote>
+<h3 id="workflow-review-updating-the-readmemd">Workflow Review: Updating the README.md</h3>
+<p>Now you will practice the GitHub Flow from beginning to end by updating the link in the README to point to your fork of the repository.</p>
+<blockquote>
+<p>Remember, your copy of the website will be rendered at <code>https://githubschool.github.io/github-games-username</code>.</p>
+<p>This link also appears in the repository description. It is a good idea to edit the website URL in the description so you can easily access your game.</p>
+<p>If you click the link, you will see the text in the <code>README.md</code>. We have intentionally broken this repository so we can fix it together.</p>
+</blockquote>
+<p>Since this is a review, we have written these steps at a high level. As we complete the review, we will show you a few shortcuts for the commands you learned in the previous activity:</p>
+<ol>
+<li>Clone your copy of the repository: <code>git clone https://github.com/githubschool/github-games-USERNAME.git</code></li>
+<li>Create a new branch called <code>readme-update</code>: <code>git checkout -b readme-update</code></li>
+<li>Edit the URL in the README.md.</li>
+<li>Commit the changes to your branch.</li>
+<li>Push your branch to GitHub: <code>git push -u origin readme-update</code></li>
+<li>Create a Pull Request <em>in your repository</em> (base: <code>gh-pages</code>, compare: <code>readme-update</code>)</li>
+<li>Merge your Pull Request.</li>
+<li>Delete the branch on GitHub.</li>
+<li>Update your local copy of the repository: <code>git pull --prune</code></li>
+</ol>
+<p><code>git checkout -b readme-update</code> is a shortcut command that allows you to combine the creation of the branch (<code>git branch readme-update</code>) and checking out to that branch (<code>git checkout readme-update</code>). The <code>-b</code> tells Git to create a new branch.</p>
+<blockquote>
+<p><code>git push -u origin readme-update</code> is the slightly longer version of the push command that should be used when you push a new branch for the first time.</p>
+<p>The <code>-u</code> is the short version of the option <code>--set-upstream</code>. This option tells Git to create a relationship between our local branch and a remote tracking branch of the same name.\</p>
+<p>You only need to use this long command the first time you push a new branch. After that, you can simply use <code>git push</code>.</p>
+</blockquote>
 
                                 
                                 </section>
@@ -541,8 +572,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="12_resolving_merge_conflicts.html" class="navigation navigation-prev " aria-label="Previous page: Resolving Merge Conflicts">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="14_git_bisect.html" class="navigation navigation-next " aria-label="Next page: Git Bisect">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +588,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Workflow Review","level":"4.1","depth":1,"next":{"title":"Git Bisect","level":"4.2","depth":1,"path":"14_git_bisect.md","ref":"14_git_bisect.md","articles":[]},"previous":{"title":"Resolving Merge Conflicts","level":"3.1","depth":1,"path":"12_resolving_merge_conflicts.md","ref":"12_resolving_merge_conflicts.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"13_workflow_review_project_github_games.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

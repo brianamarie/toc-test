@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Merge Strategies · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01_getting_ready_for_class.html" />
+    <link rel="next" href="A_workflow_discuss.md" />
     
+    
+    <link rel="prev" href="21_git_cherry_pick.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -403,7 +405,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.5" data-path="22_merge_strategies_rebase.html">
+        <li class="chapter active" data-level="5.5" data-path="22_merge_strategies_rebase.html">
             
                 <a href="22_merge_strategies_rebase.html">
             
@@ -492,7 +494,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Merge Strategies</a>
     </h1>
 </div>
 
@@ -507,13 +509,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="welcome-to-github-for-developers">Welcome to GitHub for Developers</h2>
-<p>A test
-Today you will embark on an exciting new adventure: learning how to use Git and GitHub.</p>
-<p>As we move through today&apos;s materials, please keep in mind: this class is for you! Be sure to follow along, try the activities, and ask lots of questions!</p>
-<h3 id="license">License</h3>
-<p>The prose, course text, slide layouts, class outlines, diagrams, HTML, CSS, and Markdown code in the set of educational materials located in this repository are licensed as <a href="http://creativecommons.org/licenses/by/4.0/legalcode" target="_blank">CC BY 4.0</a>. The Octocat, GitHub logo and other already-copyrighted and already-reserved trademarks and images are not covered by this license.</p>
-<p>For more information, visit: <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">http://creativecommons.org/licenses/by/4.0/</a></p>
+                                <h2 id="merge-strategies-rebase">Merge Strategies: Rebase</h2>
+<p>In this section, we will discuss another popular merge strategy, rebasing.</p>
+<h3 id="understanding-git-merge-strategies">Understanding Git Merge Strategies</h3>
+<p>Git uses three primary merge strategies:</p>
+<h4 id="fast-forward">Fast forward</h4>
+<p>A fast forward merge assumes that no changes have been made on the base branch since the feature branch was created. This means that the branch pointer for base can simply be &quot;fast forwarded&quot; to point to the same commit as the feature branch.</p>
+<h4 id="recursive">Recursive</h4>
+<p>A recursive merge means that changes have been made on both the base branch and the feature branch and git needs to recursively combine them. With a recursive merge, a new &quot;merge commit&quot; is made to mark the point in time when the two branches came together. This merge commit is special because it has more than one parent.</p>
+<h4 id="octopus">Octopus</h4>
+<p>A merge of 3 or more branches is an octopus merge. This will also create a merge commit with multiple parents.</p>
+<h3 id="about-git-rebase">About Git rebase</h3>
+<p><code>git rebase</code> enables you to modify your commit history in a variety of ways. For example, you can use it to reorder commits, edit them, squash multiple commits into one, and much more.</p>
+<p>To enable all of this, <code>rebase</code> comes in several forms. For today&apos;s class, we&apos;ll be using interactive rebase: <code>git rebase --interactive</code>, or <code>git rebase -i</code> for short.</p>
+<p>Typically, you would use <code>git rebase -i</code> to:</p>
+<ul>
+<li>Replay one branch on top of another branch</li>
+<li>Edit previous commit messages</li>
+<li>Combine multiple commits into one</li>
+<li>Delete or revert commits that are no longer necessary</li>
+</ul>
+<h3 id="creating-a-linear-history">Creating a Linear History</h3>
+<p>One of the most common uses of rebase is to eliminate recursive merges and create a more linear history. In this activity, we will learn how it is done.</p>
+<p><img src="img/git-rebase.png" alt="Git Rebase"></p>
+<h4 id="set-up">Set Up</h4>
+<ol>
+<li>Find the SHA of the initial commit: <code>git log --oneline</code></li>
+<li>Reset to the SHA of the initial commit: <code>git reset --hard SHA</code></li>
+<li>Create a new branch and check out to it: <code>git checkout -b rebase-me</code></li>
+<li>Cherry-pick files 4-6 onto the <code>rebase-me</code> branch using the reflog.</li>
+<li>Checkout to master: <code>git checkout master</code></li>
+<li>Cherry-pick files 1-3 onto the <code>rebase-me</code> branch using the reflog.</li>
+<li>Look at your history: <code>git log --oneline --graph --decorate --all</code></li>
+<li>If you merged now, it would be a recursive merge.</li>
+</ol>
+<h4 id="begin-the-rebase">Begin the Rebase</h4>
+<ol>
+<li>Checkout to the <code>rebase-me</code> branch: <code>git checkout rebase-me</code></li>
+<li>Start the merge: <code>git rebase -i master</code></li>
+<li>Your text editor will open, allowing you to see the commits to be rebased.</li>
+<li>Save and close the <code>rebase-todo</code>.</li>
+<li>Watch your rebase happen on the command line.</li>
+<li>Take another look at your history: <code>git log --oneline --graph --decorate --all</code></li>
+<li>If you merged now, it would be a fast-forward merge.</li>
+</ol>
+<h4 id="finish-the-merge">Finish the Merge</h4>
+<ol>
+<li>Checkout to master, the branch you will merge into: <code>git checkout master</code></li>
+<li>Merge your changes in to master: <code>git merge rebase-me</code></li>
+</ol>
 
                                 
                                 </section>
@@ -541,8 +585,12 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
 
             
                 
+                <a href="21_git_cherry_pick.html" class="navigation navigation-prev " aria-label="Previous page: Cherry Picking">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="01_getting_ready_for_class.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Getting Ready for Class">
+                
+                <a href="A_workflow_discuss.md" class="navigation navigation-next " aria-label="Next page: Discuss Workflows">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +601,7 @@ Today you will embark on an exciting new adventure: learning how to use Git and 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Getting Ready for Class","level":"1.2","depth":1,"path":"01_getting_ready_for_class.md","ref":"01_getting_ready_for_class.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2017-04-27T17:44:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Merge Strategies","level":"5.5","depth":1,"next":{"title":"Discuss Workflows","level":"6.1","depth":1,"path":"A_workflow_discuss.md","ref":"A_workflow_discuss.md","articles":[]},"previous":{"title":"Cherry Picking","level":"5.4","depth":1,"path":"21_git_cherry_pick.md","ref":"21_git_cherry_pick.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"22_merge_strategies_rebase.md","mtime":"2017-04-27T17:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-27T17:47:08.120Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
