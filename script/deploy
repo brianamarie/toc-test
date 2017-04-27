@@ -13,6 +13,7 @@ git config --global user.name "$GH_NAME" > /dev/null 2>&1
 #git remote add --fetch origin "$remote"
 
 rm -rf vendor
+rm .ruby-version
 
 git checkout gh-pages
 git pull origin gh-pages --rebase
