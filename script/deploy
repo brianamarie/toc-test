@@ -21,7 +21,7 @@ cp -R _book/* .
 git clean -fx node_modules
 git clean -fx _book
 
-
+git status
 
 git add .
 git commit -m "update book [ci skip]"
