@@ -15,7 +15,7 @@ git config --global user.name "$GH_NAME" > /dev/null 2>&1
 rm -rf vendor
 rm .ruby-version
 
-git checkout gh-pages --ours
+git checkout gh-pages -f --ours
 git pull origin gh-pages --rebase
 cp -R _book/* .
 git clean -fx node_modules
