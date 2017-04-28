@@ -15,10 +15,7 @@ git config --global user.name "$GH_NAME" > /dev/null 2>&1
 rm -rf vendor
 rm .ruby-version
 
-git add .
-git stash
-
-git checkout gh-pages
+git checkout gh-pages --ours
 git pull origin gh-pages --rebase
 cp -R _book/* .
 git clean -fx node_modules
@@ -26,7 +23,6 @@ git clean -fx _book
 
 git status
 
-git stash pop
 git add .
 git commit -m "update book [ci skip]"
 
