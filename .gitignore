@@ -2,7 +2,6 @@
 .DS_Store
 
 # the generated manuals
-*.pdf
 *facilitator-manual.html
 *student-manual.html
 *facilitator-manual.md
