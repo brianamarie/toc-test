@@ -1,3 +1,4 @@
 {
-    "root": "./book"
+    "root": "./book",
+    "pdf.fontSize" : "18"
 }
