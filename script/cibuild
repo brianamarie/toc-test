@@ -9,6 +9,9 @@ cd "$(dirname "$0")/.."
 echo "==> Building book"
 gitbook build
 
+#delete old book
+rm -rf mybook.pdf
+
 echo "==> Generating PDF"
 gitbook pdf . mybook.pdf
 
