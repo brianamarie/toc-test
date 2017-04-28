@@ -16,7 +16,7 @@ rm -rf vendor
 rm .ruby-version
 
 cp mybook.pdf mybook2.pdf
-git checkout gh-pages
+git checkout gh-pages --force
 git pull origin gh-pages --rebase
 cp -R _book/* .
 git clean -fx node_modules
