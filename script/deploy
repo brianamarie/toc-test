@@ -26,6 +26,7 @@ git status
 
 rm -rf mybook.pdf
 cp mybook2.pdf mybook.pdf
+rm -rf mybook2.pdf
 
 git add .
 git commit -m "update book [ci skip]"
