@@ -12,6 +12,4 @@ gitbook build
 echo "==> Generating PDF"
 gitbook pdf . mybook.pdf
 
-cp index.html gitbook.html
-
 #bundle exec jekyll serve
