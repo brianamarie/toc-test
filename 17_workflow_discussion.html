@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Viewing Local Changes · GitBook</title>
+        <title>Workflow Discussion · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="17_workflow_discussion.html" />
+    <link rel="next" href="18_create_local_repo.html" />
     
     
-    <link rel="prev" href="16_helpful_git_commands.html" />
+    <link rel="prev" href="17_view_local_changes.html" />
     
 
     </head>
@@ -333,7 +333,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="4.5" data-path="17_view_local_changes.html">
+        <li class="chapter " data-level="4.5" data-path="17_view_local_changes.html">
             
                 <a href="17_view_local_changes.html">
             
@@ -346,7 +346,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.6" data-path="17_workflow_discussion.html">
+        <li class="chapter active" data-level="4.6" data-path="17_workflow_discussion.html">
             
                 <a href="17_workflow_discussion.html">
             
@@ -481,7 +481,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Viewing Local Changes</a>
+        <a href="." >Workflow Discussion</a>
     </h1>
 </div>
 
@@ -496,26 +496,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="viewing-local-changes">Viewing Local Changes</h2>
-<p>Now that you have some files in the staging area and the working directory, let&apos;s explore how you can compare different points in your repository.</p>
-<h3 id="comparing-changes-within-the-repository">Comparing Changes within the Repository</h3>
-<p><code>git diff</code> allows you to see allows you to see the difference between any two refs in the repository. The diagram below shows how you can compare the content of your working area, staging, and HEAD (or the most recent commit):</p>
-<p><img src="img/diff-options.jpg" alt="Git Diff Options"></p>
-<p>Let&apos;s try these commands on the repository:</p>
-<pre><code class="lang-sh">$ git diff
-$ git diff --staged
-$ git diff HEAD
-$ git diff --color-words
-</code></pre>
-<p><code>git diff</code> will also allow you to compare between branches, commits, and tags by simply typing:</p>
-<pre><code class="lang-sh">$ git diff &lt;REF-1&gt; &lt;REF-2&gt;
-$ git diff gh-pages slow-down
-$ git diff origin/gh-pages gh-pages
-$ git diff 2710 b745
-</code></pre>
-<blockquote>
-<p>Notice that, just like merges, diffs are directional. It is easiest to think of it as &quot;diff back to <ref-1> starting at <ref-2>&quot; or &quot;see what is <em>not</em> in <ref-1> but <em>is</em> in <ref-2>&quot;.</ref-2></ref-1></ref-2></ref-1></p>
-</blockquote>
+                                <h2 id="workflow-discussion">Workflow Discussion</h2>
+<p>Now is a good time to discuss workflows - what works for you and your team, what might work, and what you&apos;ve been doing in the past. Have a conversation either synchronously or in issues in the class repository about different workflows. If you need or want some inspiration for questions, take a look in the appendix of this manual. </p>
 
                                 
                                 </section>
@@ -543,12 +525,12 @@ $ git diff 2710 b745
 
             
                 
-                <a href="16_helpful_git_commands.html" class="navigation navigation-prev " aria-label="Previous page: Helpful Git Commands">
+                <a href="17_view_local_changes.html" class="navigation navigation-prev " aria-label="Previous page: Viewing Local Changes">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="17_workflow_discussion.html" class="navigation navigation-next " aria-label="Next page: Workflow Discussion">
+                <a href="18_create_local_repo.html" class="navigation navigation-next " aria-label="Next page: Create a Local Repo">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -559,7 +541,7 @@ $ git diff 2710 b745
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Viewing Local Changes","level":"4.5","depth":1,"next":{"title":"Workflow Discussion","level":"4.6","depth":1,"path":"17_workflow_discussion.md","ref":"17_workflow_discussion.md","articles":[]},"previous":{"title":"Helpful Git Commands","level":"4.4","depth":1,"path":"16_helpful_git_commands.md","ref":"16_helpful_git_commands.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":18,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"17_view_local_changes.md","mtime":"2017-05-01T16:26:41.005Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-05-01T16:30:48.215Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Workflow Discussion","level":"4.6","depth":1,"next":{"title":"Create a Local Repo","level":"5.1","depth":1,"path":"18_create_local_repo.md","ref":"18_create_local_repo.md","articles":[]},"previous":{"title":"Viewing Local Changes","level":"4.5","depth":1,"path":"17_view_local_changes.md","ref":"17_view_local_changes.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./book","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":18,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"17_workflow_discussion.md","mtime":"2017-05-01T16:26:41.005Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-05-01T16:30:48.215Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
