@@ -33,6 +33,4 @@
   * [Merge Strategies](22_merge_strategies_rebase.md)
 
 ## Appendix
-  * [Discuss Workflows](A_workflow_discuss.md)
   * [Workflow Guide](App_a_workflow_guide.md)
-  * [Fork and Pull](App_b_fork_workflows.md)
