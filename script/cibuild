@@ -6,8 +6,13 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+cp index.html index_cache.html
+
 echo "==> Building book"
 gitbook build
+
+cp index.html gitbook.html
+cp index_cache.html index.html
 
 # delete old book
 rm -rf mybook.pdf
