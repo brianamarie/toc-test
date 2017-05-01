@@ -24,6 +24,7 @@
   * [Reverting Commits](15_reverting_commits.md)
   * [Helpful Git Commands](16_helpful_git_commands.md)
   * [Viewing Local Changes](17_view_local_changes.md)
+  * [Workflow Discussion](17_workflow_discussion.md)
 
 ## Project 4: Local Repository
   * [Create a Local Repo](18_create_local_repo.md)
