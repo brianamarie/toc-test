@@ -6,6 +6,7 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+ls
 cp index.html index_cache.html
 
 echo "==> Building book"
